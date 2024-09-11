@@ -58,7 +58,7 @@ void Sort(int *arr , int arrSize){
 int Search(int *arr , int arrSize , int target){
     int low = 0;
     int high = arrSize-1;
-    while(low<high){
+    while(low<=high){
         int mid = low+(high-low)/2;
         if(arr[mid]==target){
             return mid;
@@ -128,12 +128,17 @@ int* Copy(int *arr , int len){
     return newarr;
 }
 
-int* SplitArr(int *arr , int arrSize , int splitpos){
+int* SplitArr(int **arr , int arrSize , int splitpos){
     int *newarr = (int*)malloc((arrSize-splitpos)*sizeof(int));
+    int *newarr1 = (int*)malloc(splitpos*sizeof(int));
     for(int i=splitpos;i<arrSize;i++){
-        newarr[i-splitpos] = arr[i];
+        newarr[i-splitpos] = (*arr)[i];
     }
-    arr = (int*)realloc(arr,(splitpos)*sizeof(int));
+    for(int i=0;i<splitpos;i++){
+        newarr1[i] = (*arr)[i];
+    }
+    free(*arr);
+    *arr = newarr1;
     return newarr;
 }
 
@@ -242,7 +247,7 @@ int main() {
                 free(arr);
                 arr = mergedArr;
                 arrlen = arrlen+len2;
-                PrintArray(mergedArr, arrlen + len2);
+                PrintArray(mergedArr, arrlen);
                 free(arr2);
                 free(mergedArr);
                 break;
@@ -259,10 +264,13 @@ int main() {
                 int splitpos;
                 printf("Enter the split position:");
                 scanf("%d",&splitpos);
-                int *resarr = SplitArr(arr,arrlen,splitpos);
-                printf("\nArray Splitted");
+                int *resarr = SplitArr(&arr,arrlen,splitpos);
+                printf("\nArray Splitted\n");
+                PrintArray(arr,splitpos);
+                printf("\n");
                 PrintArray(resarr , arrlen-splitpos);
                 free(resarr);
+                arrlen = splitpos;
                 }
                 break;
             case 14:
