@@ -24,6 +24,23 @@ void DisplayList(Listnode *head){
   printf("NULL\n");
 }
 
+void DisplayListReverse(Listnode *tail){
+  Listnode *curr = tail;
+  while(curr!=NULL){
+    printf("%d->",curr->data);
+    curr = curr->prev;
+  }
+  printf("NULL\n");
+}
+
+Listnode * ReturnTail(Listnode *head){
+  Listnode *curr = head;
+  while(curr->next != NULL){
+    curr = curr->next;
+  }
+  return curr;
+}
+
 int Len(Listnode *head){
   Listnode *curr = head;
   int len = 1;
@@ -42,6 +59,7 @@ Listnode* InsertNode(Listnode* head , int position , int data){
   Listnode *next_node;
   if (position == 1){
     head->data = data;
+    head->prev = NULL;
     return head;
   }
   if (position==Len(head)+1){
@@ -49,6 +67,7 @@ Listnode* InsertNode(Listnode* head , int position , int data){
       curr = curr->next;
     }
     curr->next = new_node;
+    new_node->prev = curr;
     return head;
   }
   while(curr_pos<position){
@@ -57,7 +76,9 @@ Listnode* InsertNode(Listnode* head , int position , int data){
   }
   next_node = curr->next;
   curr->next = new_node;
+  new_node->prev = curr;
   new_node->next = next_node;
+  next_node->prev = new_node;
   return head;
 }
 
@@ -69,6 +90,8 @@ int main(){
   }
   printf("Length: %d\n",Len(head));
   DisplayList(head);
+  Listnode *tail = ReturnTail(head);
+  DisplayListReverse(tail);
 
 return 0;
 }
