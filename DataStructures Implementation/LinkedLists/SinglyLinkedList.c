@@ -53,7 +53,7 @@ struct ListNode* InsertNode(struct ListNode *head , int data , int position){
         while(pos<position-1){
             current = current->next;
             nextnode=nextnode->next;
-            pos++; 
+            pos++;
         }
         current->next = newnode;
         newnode->next = nextnode;
@@ -66,7 +66,7 @@ struct ListNode* DeleteNode(struct ListNode *head , int position){
     if(position==1){
         current = current->next;
         head->next = NULL;
-        head = current; 
+        head = current;
     }
     else{
         current = head;
@@ -83,7 +83,7 @@ struct ListNode* DeleteNode(struct ListNode *head , int position){
         }
         nextnode = nextnode->next;
         del->next=NULL;
-        current->next = nextnode;  
+        current->next = nextnode;
     }
     return head;
 }
@@ -109,7 +109,7 @@ int SearchList(struct ListNode* head , int data){
     struct ListNode* curr = head;
     int i=1;
     while(curr != NULL){
-        
+
         if(curr->data == data){
             return i;
         }
@@ -129,7 +129,7 @@ void UpdateList(struct ListNode* head , int data , int pos){
         }
         i++;
         curr = curr->next;
-    } 
+    }
 }
 
 int Len(struct ListNode* head){
@@ -162,6 +162,45 @@ struct ListNode* SplitList(struct ListNode* head1 , struct ListNode* head2 , int
     head2 = curr->next;
     curr->next = NULL;
     return head2;
+}
+
+struct ListNode* MergeSortedList(struct ListNode* p , struct ListNode* q , struct ListNode* s){
+    struct ListNode* newhead = NULL;
+    if(p == NULL){
+        return q;
+    }
+    if(q == NULL){
+        return p;
+    }
+    if(p && q){
+        if(p->data <= q->data){
+            s = p;
+            p = s->next;
+        }
+        else{
+            s = q;
+            q = s->next;
+        }
+    }
+    newhead = s;
+    while(p && q){
+        if(p->data <= q->data){
+            s->next = p;
+            s = p;
+            p = s->next;
+        }else{
+            s->next = q;
+            s = q;
+            q = s->next;
+        }
+    }
+    if(p == NULL){
+        s->next = q;
+    }
+    if(q == NULL){
+        s->next = p;
+    }
+    return newhead;
 }
 
 void Display(struct ListNode *head){

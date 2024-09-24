@@ -2,13 +2,44 @@
 #include<stdlib.h>
 #include"SinglyLinkedList.c"
 int main(){
+
+    //Testing MergeSortedList() method
     struct ListNode *head = (struct ListNode*)malloc(sizeof(struct ListNode));
+    head = NULL;
+    head = CreateNode(head,1);
+    head = CreateNode(head,2);
+    head = CreateNode(head,3);
+    head = CreateNode(head,4);
+    head = CreateNode(head,6);
+
+    Display(head);
+
+    printf("\n");
+
+    struct ListNode *head1 = (struct ListNode*)malloc(sizeof(struct ListNode));
+    head1 = NULL;
+    head1 = CreateNode(head1,-2);
+    head1 = CreateNode(head1,2);
+    head1 = CreateNode(head1,4);
+    head1 = CreateNode(head1,6);
+    head1 = CreateNode(head1,8);
+
+    Display(head1);
+    struct ListNode *s;
+    struct ListNode *newhead = MergeSortedList(head , head1 , s);
+    printf("\n");
+    Display(newhead);
+
+
+
+    /*struct ListNode *head = (struct ListNode*)malloc(sizeof(struct ListNode));
     head = NULL;
     int arr[] = {5,3,1,2,5,1,2,1,3,6,8,9,10,11};
     int len = 14;
     for(int i=0;i<len;i++){
         head = CreateNode(head,arr[i]);
     }
+    */
     /*
     struct ListNode *head2 = (struct ListNode*)malloc(sizeof(struct ListNode));
     head2 = NULL;
@@ -21,7 +52,7 @@ int main(){
     head = MergeList(head , head2);\
     */
 
-    Display(head);
+    //Display(head);
 
     // int index = SearchList(head , 9);
     // printf("\n%d",index);
@@ -30,8 +61,9 @@ int main(){
     // printf("\n");
     // Display(head);
 
-    
+
 // Freeing the allocated memory
+    /*
     int len2 = Len(head);
     printf("\n%d",len2);
     struct ListNode* curr = head;
@@ -41,6 +73,7 @@ int main(){
         free(curr);
         curr = nextnode;
     }
+    */
 /*
     //finding critical points in a linked list
     int *dis = (int*)malloc(2*sizeof(int));
