@@ -119,7 +119,7 @@ int SearchList(struct ListNode* head , int data){
     return -1;
 }
 
-void UpdateList(struct ListNode* head , int data , int pos){
+struct ListNode* UpdateList(struct ListNode* head , int data , int pos){
     struct ListNode* curr = head;
     int i=1;
     while(curr !=NULL){
@@ -130,6 +130,7 @@ void UpdateList(struct ListNode* head , int data , int pos){
         i++;
         curr = curr->next;
     }
+    return head;
 }
 
 int Len(struct ListNode* head){
@@ -201,6 +202,33 @@ struct ListNode* MergeSortedList(struct ListNode* p , struct ListNode* q , struc
         s->next = p;
     }
     return newhead;
+}
+
+struct ListNode * RotateList(struct ListNode *head , int k){
+    int len = Len(head);
+    for(int i=0;i<k%len;i++){
+        struct ListNode *curr  = head;
+        while(curr->next != NULL){
+            curr = curr->next;
+        }
+        curr->next = head;
+        curr = curr->next;
+        head = head->next;
+        curr->next = NULL;
+    }
+    return head;
+}
+
+void ClearMemory(struct ListNode *head){
+    struct ListNode *curr = head;
+    struct ListNode *nextnode;
+
+    while (curr != NULL) {
+        nextnode = curr->next;
+        free(curr);
+        curr = nextnode;
+    }
+    printf("\nSuccessfully cleared the memory of all the nodes in the linked list\n");
 }
 
 void Display(struct ListNode *head){
