@@ -7,9 +7,9 @@ typedef struct Listnode{
   struct Listnode *next;
 }Listnode;
 
-Listnode* CreateNode(Listnode *node){
+Listnode* CreateNode(Listnode *node , int data){
   node = (Listnode *)malloc(sizeof(Listnode));
-  node->data = 0;
+  node->data = data;
   node->prev = NULL;
   node->next = NULL;
   return node;
@@ -52,14 +52,14 @@ int Len(Listnode *head){
 }
 
 Listnode* InsertNode(Listnode* head , int position , int data){
-  Listnode* new_node = CreateNode(new_node);
-  new_node->data = data;
+  Listnode* new_node = CreateNode(new_node , data);
   int curr_pos = 1;
   Listnode *curr = head;
   Listnode *next_node;
-  if (position == 1){
-    head->data = data;
-    head->prev = NULL;
+  if (position == 1 || head == NULL){
+    new_node->next = head;
+    head = new_node;
+    new_node->prev = NULL;
     return head;
   }
   if (position==Len(head)+1){
@@ -82,16 +82,59 @@ Listnode* InsertNode(Listnode* head , int position , int data){
   return head;
 }
 
-int main(){
-
-  Listnode *head = CreateNode(head);
-  for(int i=1;i<11;i++){
-    head = InsertNode(head,i,i);
+Listnode * Delete(Listnode *head , int position){
+  int pos = 1;
+  Listnode *curr = head;
+  Listnode *nextnode = NULL;
+  Listnode *nextnextnode = NULL;
+  while(pos<position-1){
+    curr = curr->next;
+    pos++;
   }
-  printf("Length: %d\n",Len(head));
-  DisplayList(head);
-  Listnode *tail = ReturnTail(head);
-  DisplayListReverse(tail);
+  nextnode = curr->next;
+  nextnextnode = nextnode->next;
+  nextnode->next = NULL;
+  curr->next = nextnextnode;
+  free(nextnode);
+  return head;
+}
 
-return 0;
+Listnode * UpdateNode(Listnode *head , int position , int data){
+  int pos = 1;
+  Listnode *curr = head;
+  while(pos<position){
+    curr = curr->next;
+    pos++;
+  }
+  curr->data = data;
+  return head;
+}
+
+int GetValue(Listnode *head , int position){
+  Listnode *curr = head;
+  int pos = 1;
+  while(pos<position){
+    curr = curr->next;
+    pos++;
+  }
+  return curr->data;
+}
+
+int BinarySearch(Listnode *head , int target){
+  int low = 1;
+  int high = Len(head);
+  while(low<=high){
+    int mid = low+(high-low)/2;
+    int midVal = GetValue(head,mid);
+    if(midVal == target){
+      return mid;
+    }
+    if(midVal>target){
+      high = mid-1;
+    }
+    if(midVal<target){
+      low = mid+1;
+    }
+  }
+  return -1;
 }
