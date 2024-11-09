@@ -18,10 +18,13 @@ Why the hell do I learn DSA in C? There are easier languages to learn DSA like P
 - 📚 **Data Structures implemented as of now:**:
   - Arrays
   - Linked Lists (Singly and Doubly)
+  - Stack (Using Arrays and Linked Lists)
+  - Queue (Simple Queue and Circular Queue using Arrays and Linked Lists)
 
 - 🔢 **Algorithms implemented as of now:**:
   - Sorting (Bubble Sort, Merge Sort, Quick Sort, Insertion Sort, Counting Sort, Radix Sort, Selection sort)
   - Searching (Linear Search, Binary Search)
+  - Selection Algorithm (Quick Select)
 
 
 **Happy Coding!** 😊
