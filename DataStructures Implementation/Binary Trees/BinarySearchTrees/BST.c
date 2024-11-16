@@ -168,20 +168,3 @@ void ReverseInOrderTraversal(node* root){
   ReverseInOrderTraversal(root->left);
 }
 
-int main(){
-  int arr[] = {15,14,20,10,14,16,30,5,13,17,29,40,25};
-  int len = sizeof(arr)/4;
-  node* root = NULL;
-  for(int i=0;i<len;i++){
-    root = InsertNode(root,arr[i]);
-  }
-  /*
-  printf("\nInorder Traversal:\n");
-  InOrderTraversal(root); //prints the elements in ascending order
-  printf("\nReverse Inorder Traversal:\n");
-  ReverseInOrderTraversal(root); //prints the elements in descending order
-  */
-  root = DeleteNode(root,20);
-  printf("\nInorder Traversal:");
-  InOrderTraversal(root);
-}
