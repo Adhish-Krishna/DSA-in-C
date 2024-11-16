@@ -121,21 +121,24 @@ void TransfromToGST(node* root , int* sum){
   TransfromToGST(root->left,sum);
 }
 
+void ReverseInOrderTraversal(node* root){
+  if(root == NULL){
+    return;
+  }
+  ReverseInOrderTraversal(root->right);
+  printf("%d ",root->data);
+  ReverseInOrderTraversal(root->left);
+}
+
 int main(){
-  int arr[] = {3,2,6,8,7,4};
+  int arr[] = {1,9,2,8,3,7,4,6,5,0,-1,6,4,8};
   int len = sizeof(arr)/4;
   node* root = NULL;
   for(int i=0;i<len;i++){
     root = InsertNode(root,arr[i]);
   }
   printf("\nInorder Traversal:\n");
-  InOrderTraversal(root);
-  printf("\nPreorder Traversal:\n");
-  PreOrderTraversal(root);
-  printf("\nPostorder Traversal:\n");
-  PostOrderTraversal(root);
-  int sum = 0;
-  TransfromToGST(root , &sum);
-  printf("\n");
-  PreOrderTraversal(root);
+  InOrderTraversal(root); //prints the elements in ascending order
+  printf("\nReverse Inorder Traversal:\n");
+  ReverseInOrderTraversal(root); //prints the elements in descending order
 }
