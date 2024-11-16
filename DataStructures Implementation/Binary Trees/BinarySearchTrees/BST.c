@@ -47,6 +47,44 @@ node* InsertNode(node* root , int data){
   return root;
 }
 
+node* GetSuccessor(node* curr){
+  curr = curr->right;
+  while(curr!=NULL && curr->left!=NULL){
+    curr = curr->left;
+  }
+  return curr;
+}
+
+node* DeleteNode(node* root , int val){
+  if(root == NULL){
+    return root;
+  }
+  if(val < root->data){
+    root->left = DeleteNode(root->left , val);
+  }
+  else if(val > root->data){
+    root->right = DeleteNode(root->right , val);
+  }
+  else{
+    if(root->left == NULL){
+      node* temp = root->right;
+      free(root);
+      return temp;
+    }
+    else if(root->right == NULL){
+      node* temp = root->left;
+      free(root);
+      return temp;
+    }
+    else{
+      node* succ = GetSuccessor(root);
+      root->data = succ->data;
+      root->right = DeleteNode(root->right, succ->data);
+    }
+  }
+  return root;
+}
+
 int Search(node* root , int value){
   int count = 0;
   node* curr = root;
@@ -131,14 +169,19 @@ void ReverseInOrderTraversal(node* root){
 }
 
 int main(){
-  int arr[] = {1,9,2,8,3,7,4,6,5,0,-1,6,4,8};
+  int arr[] = {15,14,20,10,14,16,30,5,13,17,29,40,25};
   int len = sizeof(arr)/4;
   node* root = NULL;
   for(int i=0;i<len;i++){
     root = InsertNode(root,arr[i]);
   }
+  /*
   printf("\nInorder Traversal:\n");
   InOrderTraversal(root); //prints the elements in ascending order
   printf("\nReverse Inorder Traversal:\n");
   ReverseInOrderTraversal(root); //prints the elements in descending order
+  */
+  root = DeleteNode(root,20);
+  printf("\nInorder Traversal:");
+  InOrderTraversal(root);
 }
