@@ -111,6 +111,16 @@ void PostOrderTraversal(node* root){
   printf("%d ",root->data);
 }
 
+void TransfromToGST(node* root , int* sum){
+  if(root == NULL){
+    return;
+  }
+  TransfromToGST(root->right , sum);
+  *sum +=root->data;
+  root->data = *sum;
+  TransfromToGST(root->left,sum);
+}
+
 int main(){
   int arr[] = {3,2,6,8,7,4};
   int len = sizeof(arr)/4;
@@ -124,13 +134,8 @@ int main(){
   PreOrderTraversal(root);
   printf("\nPostorder Traversal:\n");
   PostOrderTraversal(root);
-  int val;
-  printf("\nEnter the value to search:");
-  scanf("%d",&val);
-  int res = Search(root , val);
-  if(res == 1){
-    printf("\nNode founded");
-  }else{
-    printf("\nNode not founded");
-  }
+  int sum = 0;
+  TransfromToGST(root , &sum);
+  printf("\n");
+  PreOrderTraversal(root);
 }
