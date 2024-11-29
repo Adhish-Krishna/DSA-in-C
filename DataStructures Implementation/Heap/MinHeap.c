@@ -1,8 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<stdbool.h>
-#include<limits.h>
-#include<string.h>
+#include<stdbool.h> // for using bool datatype
+#include<limits.h> // for using INT_MAX
+#include<string.h> // for using memcpy function
 
 void Swap(int* a , int* b){
   int temp = *a;
