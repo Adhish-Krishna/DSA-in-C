@@ -14,7 +14,7 @@ typedef struct Graph{
   bool isDirected;
 }Graph;
 
-Node* CreateNode(int data){
+Node* CreateListNode(int data){
   Node* newnode = (Node*)malloc(sizeof(Node));
   newnode->data = data;
   newnode->next = NULL;
@@ -27,14 +27,14 @@ Graph* CreateGraph(int N , bool isDirected){
   graph->isDirected = isDirected;
   graph->List = (Node**)malloc(graph->N*sizeof(Node*));
   for(int i=0;i<graph->N;i++){
-    graph->List[i] = CreateNode(i);
+    graph->List[i] = CreateListNode(i);
   }
   return graph;
 }
 
 Graph* AddEdge(Graph* graph , int src , int dest){
-  Node* dest_node = CreateNode(dest);
-  Node* src_node = CreateNode(src);
+  Node* dest_node = CreateListNode(dest);
+  Node* src_node = CreateListNode(src);
   if(graph->List[src] == NULL){
     graph->List[src] = src_node;
     src_node->next = dest_node;
@@ -50,7 +50,7 @@ Graph* AddEdge(Graph* graph , int src , int dest){
       while(new_curr->next != NULL){
         new_curr = new_curr->next;
       }
-      new_curr->next = CreateNode(src);
+      new_curr->next = CreateListNode(src);
     }
   }
   return graph;
@@ -71,6 +71,8 @@ void Display(Graph* graph){
   }
 }
 
+
+/*
 int main(){
   Graph* graph = CreateGraph(5 , true);
   graph = AddEdge(graph , 0 , 1);
@@ -83,3 +85,4 @@ int main(){
   Display(graph);
   return 0;
 }
+*/

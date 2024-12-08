@@ -84,6 +84,7 @@ void Print(Queue* queue){
   }
 }
 
+/*
 int main(){
   Queue *newqueue = CreateQueue(newqueue);
   newqueue = Enqueue(newqueue,1);
@@ -102,3 +103,4 @@ int main(){
   Print(newqueue);
   return 0;
 }
+*/
