@@ -23,10 +23,12 @@ Why the hell do I learn DSA in C? There are easier languages to learn DSA like P
   - Queue (Simple Queue and Circular Queue using Arrays and Linked Lists)
   - Binary Trees(Binary Search Tree with Insertions and Search Operation)
   - Heap (Min Heap using Dynamic Arrays with Insert , Delete Root , Heapify Up , Heapify Down operations)
+  - Graphs (Adjaceny Matrix and Adjacency List Representaions)
 
 - 🔢 **Algorithms implemented as of now:**:
   - Sorting (Bubble Sort, Merge Sort, Quick Sort, Insertion Sort, Counting Sort, Radix Sort, Selection sort)
   - Searching (Linear Search, Binary Search)
   - Selection Algorithm (Quick Select)
+  - Graph Traversal Algorithms (Breadth First Search (BFS) and Recursive Depth First Search (DFS))
 
 **Happy Coding!** 😊
