@@ -94,6 +94,7 @@ int Size(Stack* stack){
     return len;
 }
 
+/*
 int main(){
     Stack *newstack = CreateStack(newstack);
     newstack = Push(newstack,1);
@@ -111,5 +112,4 @@ int main(){
     Print(newstack);
     return 0;
 }
-
- 
+*/
