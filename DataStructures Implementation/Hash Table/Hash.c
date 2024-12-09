@@ -2,15 +2,6 @@
 #include<stdlib.h>
 #include<math.h>
 
-int Len(int num){
-  int count = 0;
-  while(num>0){
-    count++;
-    num = num/10;
-  }
-  return count;
-}
-
 int DivisionMethod(int val, int table_size){
   return (val%table_size);
 }

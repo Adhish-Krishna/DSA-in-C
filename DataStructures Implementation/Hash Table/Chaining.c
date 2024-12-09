@@ -50,6 +50,43 @@ HashTable* InsertIntoTable(HashTable* hashtable , int key , int val){
   return hashtable;
 }
 
+Node* Search(HashTable* hashtable , int key , int val){
+  int hash = MidSquareMethod(key , hashtable->size);
+  Node* curr = hashtable->table[hash];
+  while(curr!=NULL){
+    if(curr->data == val){
+      return curr;
+    }
+    curr = curr->next;
+  }
+  return NULL;
+}
+
+void Delete(HashTable* hashtable , int key , int val){
+  int hash = MidSquareMethod(key , hashtable->size);
+  Node* curr = hashtable->table[hash];
+  Node* nextnode = NULL;
+  Node* prev = NULL;
+  if(curr->data == val){
+    nextnode = curr->next;
+    curr->next = NULL;
+    free(curr);
+    hashtable->table[hash] = nextnode;
+    return;
+  }
+  while(curr->next->data != val){
+    prev = curr;
+    curr = curr->next;
+  }
+  prev = curr;
+  curr = curr->next;
+  nextnode = curr->next;
+  curr->next = NULL;
+  free(curr);
+  prev->next = nextnode;
+  return;
+}
+
 void DisplayTable(HashTable* hashtable){
   for(int i=0; i<hashtable->size; i++){
     Node* curr = hashtable->table[i];
@@ -75,5 +112,11 @@ int main(){
   hashtable = InsertIntoTable(hashtable , 8 , 38);
   hashtable = InsertIntoTable(hashtable , 9 , 39);
   hashtable = InsertIntoTable(hashtable , 10 , 34);
+  DisplayTable(hashtable);
+  printf("\nSearch\n");
+  Node* node = Search(hashtable , 4 , 23);
+  printf("%d" , node->data);
+  Delete(hashtable , 4 , 23);
+  printf("Delete\n");
   DisplayTable(hashtable);
 }
