@@ -21,7 +21,7 @@ Why the hell do I learn DSA in C? There are easier languages to learn DSA like P
   - Linked Lists (Singly and Doubly)
   - Stack (Using Arrays and Linked Lists)
   - Queue (Simple Queue and Circular Queue using Arrays and Linked Lists)
-  - Binary Trees(Binary Search Tree with Insertions and Search Operation)
+  - Binary Trees(Binary Search Tree and AVL Tress)
   - Heap (Min Heap using Dynamic Arrays with Insert , Delete Root , Heapify Up , Heapify Down operations)
   - Graphs (Adjaceny Matrix and Adjacency List Representaions)
 
