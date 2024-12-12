@@ -68,17 +68,71 @@ TreeNode* InsertNode(TreeNode* root , int data){
   }
   UpdateHeight(root);
   int balance = GetBalanceFactor(root);
-  if(balance>1 && data < root->left->data){
+ if(balance > 1 && GetBalanceFactor(root->left)>=0){
     return RightRotate(root);
   }
-  if(balance<-1 && data > root->right->data){
+  if(balance < -1 && GetBalanceFactor(root->right) <=0){
     return LeftRotate(root);
   }
-  if(balance>1 && data>root->left->data){
+  if(balance >1 && GetBalanceFactor(root->left)<0){
     root->left = LeftRotate(root->left);
     return RightRotate(root);
   }
-  if(balance<-1 && data < root->right->data){
+  if(balance<-1 && GetBalanceFactor(root->right)>0){
+    root->right = RightRotate(root->right);
+    return LeftRotate(root);
+  }
+  return root;
+}
+
+TreeNode* GetSuccessor(TreeNode* curr){
+  curr = curr->right;
+  while(curr!=NULL && curr->left!=NULL){
+    curr = curr->left;
+  }
+  return curr;
+}
+
+TreeNode* DeleteNode(TreeNode* root,int data){
+  if(root == NULL){
+    return root;
+  }
+  if(data < root->data){
+    root->left = DeleteNode(root->left , data);
+  }
+  else if(data > root->data){
+    root->right = DeleteNode(root->right , data);
+  }
+  else{
+    if(root->left == NULL){
+      TreeNode* temp = root->right;
+      free(root);
+      return temp;
+    }
+    else if(root->right == NULL){
+      TreeNode* temp = root->left;
+      free(root);
+      return temp;
+    }
+    else{
+      TreeNode* succ = GetSuccessor(root);
+      root->data = succ->data;
+      root->right = DeleteNode(root->right , succ->data);
+    }
+  }
+  UpdateHeight(root);
+  int balance = GetBalanceFactor(root);
+  if(balance > 1 && GetBalanceFactor(root->left)>=0){
+    return RightRotate(root);
+  }
+  if(balance < -1 && GetBalanceFactor(root->right) <=0){
+    return LeftRotate(root);
+  }
+  if(balance >1 && GetBalanceFactor(root->left)<0){
+    root->left = LeftRotate(root->left);
+    return RightRotate(root);
+  }
+  if(balance<-1 && GetBalanceFactor(root->right)>0){
     root->right = RightRotate(root->right);
     return LeftRotate(root);
   }
@@ -104,20 +158,27 @@ void InOrderTraversal(TreeNode* root){
 }
 
 int main() {
-    TreeNode* root = NULL;
-    root = InsertNode(root , 10);
-    root = InsertNode(root , 20);
-    root = InsertNode(root , 30);
-    root = InsertNode(root , 40);
-    root = InsertNode(root , 0);
-    root = InsertNode(root , 5);
-    root = InsertNode(root , 12);
-    root = InsertNode(root , 3);
-    root = InsertNode(root , 5);
-    root = InsertNode(root , 60);
-
-    PreOrderTraversal(root);
-    printf("\n");
-    InOrderTraversal(root);
-    return 0;
+  TreeNode* root = NULL;
+  root = InsertNode(root , 21);
+  root = InsertNode(root , 26);
+  root = InsertNode(root , 30);
+  root = InsertNode(root , 9);
+  root = InsertNode(root , 4);
+  root = InsertNode(root , 14);
+  root = InsertNode(root , 28);
+  root = InsertNode(root , 7);
+  root = InsertNode(root , 3);
+  root = InsertNode(root , 45);
+  root = InsertNode(root , 5);
+  root = InsertNode(root , 13);
+  PreOrderTraversal(root);
+  printf("\n");
+  InOrderTraversal(root);
+  root = DeleteNode(root , 5);
+  printf("\n");
+  PreOrderTraversal(root);
+  printf("\n");
+  InOrderTraversal(root);
+  printf("\n%d",GetBalanceFactor(root));
+  return 0;
 }
