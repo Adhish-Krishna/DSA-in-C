@@ -159,26 +159,13 @@ void InOrderTraversal(TreeNode* root){
 
 int main() {
   TreeNode* root = NULL;
-  root = InsertNode(root , 21);
-  root = InsertNode(root , 26);
-  root = InsertNode(root , 30);
-  root = InsertNode(root , 9);
-  root = InsertNode(root , 4);
-  root = InsertNode(root , 14);
-  root = InsertNode(root , 28);
-  root = InsertNode(root , 7);
-  root = InsertNode(root , 3);
-  root = InsertNode(root , 45);
-  root = InsertNode(root , 5);
-  root = InsertNode(root , 13);
+  int arr[] = {40,20,10,25,30,22,50,60,55,70,65,80};
+  int len = sizeof(arr)/4;
+  for(int i=0;i<len;i++){
+    root = InsertNode(root , arr[i]);
+  }
   PreOrderTraversal(root);
   printf("\n");
   InOrderTraversal(root);
-  root = DeleteNode(root , 5);
-  printf("\n");
-  PreOrderTraversal(root);
-  printf("\n");
-  InOrderTraversal(root);
-  printf("\n%d",GetBalanceFactor(root));
   return 0;
 }
