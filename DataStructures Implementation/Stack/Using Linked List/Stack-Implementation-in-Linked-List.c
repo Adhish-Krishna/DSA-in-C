@@ -4,7 +4,7 @@
 #define INT_MIN -1000000
 
 typedef struct node{
-    int data;
+    char data;
     struct node* next;
 }node;
 
@@ -13,7 +13,7 @@ typedef struct Stack{
     node* head;
 }Stack;
 
-node* CreateNode(node* newnode , int data){
+node* CreateNode(node* newnode , char data){
     newnode = (node*)malloc(sizeof(node));
     newnode->data = data;
     newnode->next = NULL;
@@ -27,7 +27,7 @@ Stack* CreateStack(Stack* stack){
     return stack;
 }
 
-Stack* Push(Stack* stack, int data){
+Stack* Push(Stack* stack, char data){
     if(stack->head!=NULL){
         node* newnode = CreateNode(newnode,data);
         stack->top->next = newnode;
@@ -67,19 +67,16 @@ int isEmpty( Stack* stack){
     return 0;
 }
 
-int Peek(Stack* stack){
+char Peek(Stack* stack){
     if(stack->head != NULL){
         return stack->top->data;
-    }
-    else{
-        return INT_MIN;
     }
 }
 
 void Print(Stack * stack){
     node* curr = stack->head;
     while(curr!=NULL){
-        printf("%d ",curr->data);
+        printf("%c ",curr->data);
         curr = curr->next;
     }
 }
