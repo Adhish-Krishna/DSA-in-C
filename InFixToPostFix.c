@@ -98,8 +98,9 @@ char* InfixToPostfix(char* expression){
 }
 
 int main(){
-  char* exp = "a^(b^c)";
+  char* exp = "a^b^c";
   char* postfix = InfixToPostfix(exp);
   printf("%s",postfix);
+  free(postfix);
   return 0;
 }

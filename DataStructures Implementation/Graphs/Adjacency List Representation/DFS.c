@@ -1,7 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"DirectedGraph.c"
-#include"../../Stack/Using Linked List/Stack-Implementation-in-Linked-List.c"
 
 void DFS(Graph* graph , Node* node ,  int* visited){
   if(visited == NULL){
@@ -18,6 +17,7 @@ void DFS(Graph* graph , Node* node ,  int* visited){
   }
 }
 
+
 int main(){
   Graph* graph = CreateGraph(6 , true);
   graph = AddEdge(graph , 0 , 3);
@@ -32,7 +32,7 @@ int main(){
   graph = AddEdge(graph , 2 , 3);
   graph = AddEdge(graph , 1 , 0);
   graph = AddEdge(graph , 3 , 4);
-   printf("Adjaceny List Representation\n");
+  printf("Adjaceny List Representation\n");
   Display(graph);
   printf("DFS\n");
   int* visited = NULL;
